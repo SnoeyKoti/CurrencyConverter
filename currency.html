@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="currency.css">
+   
+</head>
+<body>
+    <div class="container">
+        <h2>Currency Converter to Rand</h2>
+        <input type="number" id="amount" placeholder="Enter amount" />
+        <select id="fromCurrency">
+            <option value="USD">USD (Dollars)</option>
+            <option value="GBP">GBP (Pounds)</option>
+            <option value="BWP">BWP (Pula)</option>
+        </select>
+        <button onclick="convertCurrency()">Convert to ZAR</button>
+        <div id="result"></div>
+        <div class="formulas">
+            <h3>Conversion Formulas:</h3>
+            <p>Dollars to Rand = Dollars * 17.97</p>
+            <p>Pounds to Rand = Pounds * 22.75</p>
+            <p>Pula to Rand = Pula * 1.33</p>
+        </div>
+    </div>
+    <script>
+        const exchangeRates = {
+            'USD': 17.97, // Dollars to Rand
+            'GBP': 22.75, // Pounds to Rand
+            'BWP': 1.33   // Pula to Rand
+        };
+
+        function convertCurrency() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const fromCurrency = document.getElementById('fromCurrency').value;
+
+            if (isNaN(amount)) {
+                document.getElementById('result').innerText = "Please enter a valid amount.";
+                return;
+            }
+
+            const rate = exchangeRates[fromCurrency];
+            const convertedAmount = amount * rate;
+
+            document.getElementById('result').innerText = `${amount} ${fromCurrency} is equal to ${convertedAmount.toFixed(2)} ZAR (Rand)`;
+        }
+    </script>
+</body>
+</html>
